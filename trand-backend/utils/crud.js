@@ -1,4 +1,4 @@
-const getOne = model => async (req, res) => {
+const getOne = model => async (req, res, next) => {
   try {
     const doc = await model
       .findOne({ _id: req.params.id })
@@ -12,11 +12,11 @@ const getOne = model => async (req, res) => {
     res.status(200).json({ data: doc })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    next(400)
   }
 }
 
-const getMany = model => async (req, res) => {
+const getMany = model => async (req, res, next) => {
   try {
     const docs = await model
       .find({})
@@ -26,21 +26,21 @@ const getMany = model => async (req, res) => {
     res.status(200).json({ data: docs })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    next(400)
   }
 }
 
-const createOne = model => async (req, res) => {
+const createOne = model => async (req, res, next) => {
   try {
     const doc = await model.create({ ...req.body })
     res.status(201).json({ data: doc })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    next(e)
   }
 }
 
-const updateOne = model => async (req, res) => {
+const updateOne = model => async (req, res, next) => {
   try {
     const updatedDoc = await model
       .findOneAndUpdate(
@@ -60,7 +60,7 @@ const updateOne = model => async (req, res) => {
     res.status(200).json({ data: updatedDoc })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    next(400)
   }
 }
 

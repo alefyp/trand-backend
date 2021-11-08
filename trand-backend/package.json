@@ -4,7 +4,9 @@
   "description": "technical interview for kargoru",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -21,10 +23,12 @@
   },
   "homepage": "https://github.com/alefyp/trand-backend#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^6.0.12"
   },
   "devDependencies": {
+    "eslint": "^8.2.0",
     "nodemon": "^2.0.14"
   }
 }
