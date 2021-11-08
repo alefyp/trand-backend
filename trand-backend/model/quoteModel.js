@@ -24,12 +24,12 @@ const quoteSchema = new mongoose.Schema({
       message: (email) => `${email.value} is not a a valid email`,
     },
   },
-  originCity: {
-    type: String,
+  originCityCode: {
+    type: Number,
     required: true,
   },
-  destinationCity: {
-    type: String,
+  destinationCityCode: {
+    type: Number,
     required: true,
   },
   paymentMethod: {
