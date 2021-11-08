@@ -12,6 +12,14 @@ const { port, dbUrl } = config;
 const app = express();
 app.set('config');
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
+
+app.get('/api', (req, res) => res.json({ name: pkg.name, version: pkg.version }));
+app.use('/api/quote', quoteRouter);
+app.all('*', (req, resp, nextAll) => nextAll(404));
+
 
 /** connect function */
 const start = async () => {
@@ -28,14 +36,6 @@ const start = async () => {
 
 /** init */
 start();
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(cors());
-
-app.get('/api', (req, res) => res.json({ name: pkg.name, version: pkg.version }));
-app.use('/api/quote', quoteRouter);
-app.all('*', (req, resp, nextAll) => nextAll(404));
 
 
 
